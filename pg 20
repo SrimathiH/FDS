@@ -1,0 +1,29 @@
+import scipy.stats as stats
+
+def is_significant_difference(conversion_rates_A, conversion_rates_B):
+    # Perform two-sample t-test
+t_stat, p_value = stats.ttest_ind(conversion_rates_A, conversion_rates_B)
+
+    # Define the significance level (alpha)
+    alpha = 0.05
+
+    # Check if the p-value is less than the significance level
+    if p_value< alpha:
+        return True, t_stat, p_value
+    else:
+        return False, t_stat, p_value
+
+if _name_ == "_main_":
+    # Replace conversion_rates_A and conversion_rates_B with the actual data lists
+conversion_rates_A = [0.12, 0.15, 0.18, 0.14, 0.17]  # Example data for website design A
+conversion_rates_B = [0.09, 0.11, 0.14, 0.10, 0.12]  # Example data for website design B
+
+is_significant, t_statistic, p_value = is_significant_difference(conversion_rates_A, conversion_rates_B)
+
+    if is_significant:
+print("There is a statistically significant difference between website designs A and B.")
+    else:
+print("There is no statistically significant difference between website designs A and B.")
+
+print(f"T-statistic: {t_statistic}")
+print(f"P-value: {p_value}")
