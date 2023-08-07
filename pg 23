@@ -1,0 +1,28 @@
+import numpy as np
+import pandas as pd
+from scipy import stats
+import matplotlib.pyplot as plt
+control_group = np.array([3, 4, 5, 2, 3, 6, 4, 5, 4, 5])
+treatment_group = np.array([7, 8, 9, 6, 7, 9, 8, 7, 6, 9])
+
+t_stat, p_value = stats.ttest_ind(control_group, treatment_group)
+
+# Define significance level (alpha)
+alpha = 0.05
+
+# Check if the p-value is less than alpha
+if p_value< alpha:
+print("The new treatment has a statistically significant effect compared to the placebo.")
+else:
+print("There is no statistically significant effect of the new treatment compared to the placebo.")
+# Create a DataFrame for easy visualization
+df = pd.DataFrame({"Control Group": control_group, "Treatment Group": treatment_group})
+
+# Create a box plot
+plt.figure(figsize=(8, 6))
+plt.boxplot([control_group, treatment_group], labels=["Control Group", "Treatment Group"])
+plt.xlabel("Groups")
+plt.ylabel("Scores")
+plt.title("Box Plot of Control Group vs. Treatment Group")
+plt.grid(True)
+plt.show()
